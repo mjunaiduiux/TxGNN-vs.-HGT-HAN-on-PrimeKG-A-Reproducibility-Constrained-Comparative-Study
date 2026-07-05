@@ -1,0 +1,109 @@
+{
+  "last_updated": "2026-06-29",
+  "hardware": {
+    "gpu": "Google Colab T4 (remote runtime, ~14.5-14.6GB peak observed for HGT/HAN)",
+    "ram_gb": null,
+    "os": "Linux (Colab remote runtime); orchestrated from Windows 10 via VS Code Colab extension"
+  },
+  "data": {
+    "kg_name": "PrimeKG",
+    "disease_nodes": 17080,
+    "drug_nodes": 7957,
+    "total_nodes": 129375,
+    "total_edges": 8100498,
+    "source": "Chandak et al., Scientific Data 2023, DOI: 10.7910/DVN/IXA7BM"
+  },
+  "models": [
+    {
+      "name": "TxGNN-architecture reimplementation (PyG), this study",
+      "type": "Relational GNN (SAGEConv) + metric learning-style decoder",
+      "pretrained": false,
+      "note": "NOT the original authors' checkpoint. TxGNN pip package fails to install on current Colab Python (distutils removed). This is a from-scratch reimplementation of the published two-phase pretrain/fine-tune architecture.",
+      "split_results": [
+        {
+          "split": "random",
+          "seed": 42,
+          "indication_AUPRC": 0.9911400736950633,
+          "indication_AUROC": 0.9934462678079324,
+          "contraindication_AUPRC": 0.9933417011464862,
+          "contraindication_AUROC": 0.9955717390224496,
+          "training_time_min": 1.15,
+          "param_count": 9105600,
+          "gpu_mem_peak_mb": null
+        },
+        {
+          "split": "zero_shot",
+          "seed": 42,
+          "indication_AUPRC": 0.9799452567291346,
+          "indication_AUROC": 0.9859299000351579,
+          "contraindication_AUPRC": 0.9831985991764324,
+          "contraindication_AUROC": 0.9892129765173643,
+          "training_time_min": 1.16,
+          "param_count": 9105600,
+          "gpu_mem_peak_mb": null
+        }
+      ]
+    },
+    {
+      "name": "HGT",
+      "type": "Heterogeneous Graph Transformer (attention-based)",
+      "pretrained": false,
+      "note": "Single-stage supervised, reduced scale to fit a single T4 (hidden=32, heads=2, edges capped at 50k/relation, fp16). Not directly comparable to a full-scale run.",
+      "split_results": [
+        {
+          "split": "random",
+          "seed": 42,
+          "indication_AUPRC": 0.9833719351637628,
+          "indication_AUROC": 0.9859309588919655,
+          "contraindication_AUPRC": 0.9944982619187841,
+          "contraindication_AUROC": 0.9957607523210908,
+          "training_time_min": 1.54,
+          "param_count": 4327100,
+          "gpu_mem_peak_mb": 14644.0
+        },
+        {
+          "split": "zero_shot",
+          "seed": 42,
+          "indication_AUPRC": 0.9768662655766696,
+          "indication_AUROC": 0.9829931501982594,
+          "contraindication_AUPRC": 0.9935181390268848,
+          "contraindication_AUROC": 0.9947407862116066,
+          "training_time_min": 1.49,
+          "param_count": 4327100,
+          "gpu_mem_peak_mb": 14643.3
+        }
+      ]
+    },
+    {
+      "name": "HAN",
+      "type": "Heterogeneous Attention Network",
+      "pretrained": false,
+      "note": "Same reduced-scale setup as HGT (hidden=32, heads=2, edges capped at 50k/relation, fp16).",
+      "split_results": [
+        {
+          "split": "random",
+          "seed": 42,
+          "indication_AUPRC": 0.9818071556711314,
+          "indication_AUROC": 0.9860871080718548,
+          "contraindication_AUPRC": 0.9812342987199284,
+          "contraindication_AUROC": 0.9866273209255995,
+          "training_time_min": 0.65,
+          "param_count": 4169696,
+          "gpu_mem_peak_mb": 14540.1
+        },
+        {
+          "split": "zero_shot",
+          "seed": 42,
+          "indication_AUPRC": 0.9853306871105153,
+          "indication_AUROC": 0.9882659195833461,
+          "contraindication_AUPRC": 0.9855060222981411,
+          "contraindication_AUROC": 0.9903145439124498,
+          "training_time_min": 0.64,
+          "param_count": 4169696,
+          "gpu_mem_peak_mb": 14540.1
+        }
+      ]
+    }
+  ],
+  "notes": "All metrics use random-negative-sampling evaluation, which is known to inflate AUPRC/AUROC because random non-edges are easy negatives. All three models land in a narrow 0.98-0.99 band on both metrics and both splits, which is itself a finding: this evaluation protocol does not discriminate well between architectures here. TxGNN ran at full PrimeKG scale (8.1M edges, hidden=64); HGT/HAN ran at reduced scale (edges capped at 50k/relation, hidden=32) after the first attempt OOM'd a T4 GPU \u2014 the hidden-dim and edge-coverage mismatch breaks strict apples-to-apples comparison and is flagged as a limitation, not glossed over."
+}

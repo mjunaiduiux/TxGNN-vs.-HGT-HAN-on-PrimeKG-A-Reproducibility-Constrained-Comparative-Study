@@ -1,0 +1,15 @@
+{
+  "model": "HGT",
+  "type": "Heterogeneous Graph Transformer (attention-based)",
+  "pretrained": false,
+  "split": "random_split",
+  "seed": 42,
+  "indication_AUPRC": 0.9833719351637628,
+  "indication_AUROC": 0.9859309588919655,
+  "contraindication_AUPRC": 0.9944982619187841,
+  "contraindication_AUROC": 0.9957607523210908,
+  "training_time_min": 1.54,
+  "param_count": 4327100,
+  "gpu_mem_peak_mb": 14644.0,
+  "notes": "Single-stage supervised training (no pretrain phase), same splits as Phase 2 (loaded from splits.npz), seed 42. Reduced scale to fit a single T4: hidden=32, edges capped at 50000/relation, 100 epochs, mixed precision."
+}

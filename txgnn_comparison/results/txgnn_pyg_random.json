@@ -1,0 +1,12 @@
+{
+  "model": "TxGNN-architecture reimplementation (PyG), this study",
+  "split": "random",
+  "seed": 42,
+  "indication_AUPRC": 0.9911400736950633,
+  "indication_AUROC": 0.9934462678079324,
+  "contraindication_AUPRC": 0.9933417011464862,
+  "contraindication_AUROC": 0.9955717390224496,
+  "training_time_min": 1.15,
+  "param_count": 9105600,
+  "notes": "Not the original TxGNN checkpoint. PyG reimplementation: relational SAGEConv encoder pretrained on full PrimeKG, fine-tuned with dot-product decoder. Split constructed for this study, seed 42."
+}

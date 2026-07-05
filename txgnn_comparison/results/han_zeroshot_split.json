@@ -1,0 +1,15 @@
+{
+  "model": "HAN",
+  "type": "Heterogeneous Attention Network",
+  "pretrained": false,
+  "split": "zeroshot_split",
+  "seed": 42,
+  "indication_AUPRC": 0.9853306871105153,
+  "indication_AUROC": 0.9882659195833461,
+  "contraindication_AUPRC": 0.9855060222981411,
+  "contraindication_AUROC": 0.9903145439124498,
+  "training_time_min": 0.64,
+  "param_count": 4169696,
+  "gpu_mem_peak_mb": 14540.1,
+  "notes": "Single-stage supervised training (no pretrain phase), same splits as Phase 2 (loaded from splits.npz), seed 42. Reduced scale to fit a single T4: hidden=32, edges capped at 50000/relation, 100 epochs, mixed precision."
+}

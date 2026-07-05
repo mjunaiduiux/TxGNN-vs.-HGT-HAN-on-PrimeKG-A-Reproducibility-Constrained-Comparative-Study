@@ -1,0 +1,55 @@
+{
+  "columns": [
+    "Dimension",
+    "Generic GNN (HGT/HAN)",
+    "TxGNN"
+  ],
+  "rows": [
+    [
+      "Task framing",
+      "Per-disease supervised link prediction",
+      "Unified indication+contraindication across 17080 diseases"
+    ],
+    [
+      "Training paradigm",
+      "Single-stage supervised",
+      "Two-phase: self-supervised pretrain -> fine-tune"
+    ],
+    [
+      "Attention mechanism",
+      "Core (multi-head self-attention per node/metapath)",
+      "Not used (SAGEConv mean aggregation)"
+    ],
+    [
+      "Zero-shot capability",
+      "Not designed for it",
+      "Designed for it"
+    ],
+    [
+      "Random-split indication AUPRC (this study)",
+      0.9833719351637628,
+      0.9911400736950633
+    ],
+    [
+      "Zero-shot indication AUPRC (this study)",
+      0.9768662655766696,
+      0.9799452567291346
+    ],
+    [
+      "Parameter count (this study)",
+      4327100,
+      9105600
+    ],
+    [
+      "Training time, random split (min, this study)",
+      1.54,
+      1.15
+    ],
+    [
+      "Interpretability",
+      "Attention weights (limited multi-hop)",
+      "Multi-hop explainer paths (not evaluated in this study)"
+    ]
+  ],
+  "notes": "Numeric rows are from this study's reduced-scale runs (HGT/HAN capped at 50k edges/relation, hidden=32; TxGNN reimplementation at full scale, hidden=64) \u2014 not directly comparable in scale, see results.json notes."
+}

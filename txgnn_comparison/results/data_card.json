@@ -1,0 +1,41 @@
+{
+  "kg_name": "PrimeKG",
+  "source": "Chandak et al., Scientific Data 2023, DOI: 10.7910/DVN/IXA7BM",
+  "downloaded_file": "kg.csv",
+  "file_size_bytes": 981751236,
+  "total_nodes": 129375,
+  "node_counts_by_type": {
+    "biological_process": 28642,
+    "gene/protein": 27671,
+    "disease": 17080,
+    "effect/phenotype": 15311,
+    "anatomy": 14035,
+    "molecular_function": 11169,
+    "drug": 7957,
+    "cellular_component": 4176,
+    "pathway": 2516,
+    "exposure": 818
+  },
+  "total_edges": 8100498,
+  "edge_counts_by_relation_partial": {
+    "anatomy_protein_present": 3036406,
+    "drug_drug": 2672628,
+    "protein_protein": 642150,
+    "disease_phenotype_positive": 300634,
+    "bioprocess_protein": 289610,
+    "cellcomp_protein": 166804,
+    "disease_protein": 160822,
+    "molfunc_protein": 139060,
+    "drug_effect": 129568,
+    "bioprocess_bioprocess": 105772,
+    "pathway_protein": 85292,
+    "exposure_protein": 2424,
+    "disease_phenotype_negative": 2386,
+    "exposure_molfunc": 90,
+    "exposure_cellcomp": 20
+  },
+  "disease_nodes": 17080,
+  "drug_nodes": 7957,
+  "retrieved_date": "2026-06-29",
+  "notes": "All counts computed directly from the downloaded kg.csv (matches Chandak et al.'s published 17,080 diseases / 7,957 drugs). edge_counts_by_relation_partial is INCOMPLETE: the full printout was truncated by the notebook output viewer and the middle entries (including indication/contraindication counts) were never captured here. total_edges and total_nodes are confirmed complete; the relation breakdown is not."
+}
